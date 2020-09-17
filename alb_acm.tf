@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
 variable "cidr_vpc" {
@@ -12,7 +12,7 @@ variable "cidr_subnet" {
 }
 variable "availability_zone" {
   description = "availability zone to create subnet"
-  default = "us-east-2a"
+  default = "us-east-1"
 }
 variable "public_key_path" {
   description = "Public key path"
