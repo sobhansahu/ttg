@@ -1,30 +1,32 @@
-# Create a new instance of the latest Ubuntu 20.04 on an
-# t3.micro node with an AWS Tag naming it "HelloWorld"
-provider "aws" {
-  region = "us-west-2"
+provider “aws” {
+ region = “us-east-1”
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
+variable "cidr_vpc" {
+  description = "CIDR block for the VPC"
+  default = "10.1.0.0/16"
 }
-
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
-
-  tags = {
-    Name = "HelloWorld"
-  }
+variable "cidr_subnet" {
+  description = "CIDR block for the subnet"
+  default = "10.1.0.0/24"
+}
+variable "availability_zone" {
+  description = "availability zone to create subnet"
+  default = "us-east-2a"
+}
+variable "public_key_path" {
+  description = "Public key path"
+  default = "~/.ssh/id_rsa.pub"
+}
+variable "instance_ami" {
+  description = "AMI for aws EC2 instance"
+  default = "ami-0cf31d971a3ca20d6"
+}
+variable "instance_type" {
+  description = "type for aws EC2 instance"
+  default = "t2.micro"
+}
+variable "environment_tag" {
+  description = "Environment tag"
+  default = "Production"
 }
