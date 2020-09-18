@@ -85,7 +85,7 @@ resource "aws_instance" "testInstance" {
   subnet_id = "${aws_subnet.subnet_public.id}"
   vpc_security_group_ids = ["${aws_security_group.sg_22.id}"]
   tags = {
-    Name = "EC2_${environment_tag}"
+    Name = "EC2_${var.environment_tag}"
    
   }
 }
